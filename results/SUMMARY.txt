@@ -1,0 +1,96 @@
+===== MiniCPM5-2B quant A/B  2026-09-09T02:17:39-05:00 =====
+arms: bf16 nvfp4_w4a16   tasks: humaneval_instruct mbpp_plus   repeats: 3
+checkpoints: W4A16_NVFP4 / NVFP4_AWQ / W4A16_AWQ(int4) via ModelOpt 0.47, vs BF16
+
+--- bf16 / humaneval_instruct ---
+
+  humaneval_instruct   [pass@1,create_test]   n=164   draws=3
+      rep1      87.805%   144/164
+      rep2      85.976%   141/164
+      rep3      85.976%   141/164
+      median    85.976%
+      range     85.976% ..  87.805%   (spread 1.829 pp)
+      Wilson 95% on median: [79.83, 90.47]  (sampling error only)
+      VERDICT: NONDETERMINISTIC -- identical config, 1.829 pp spread across re-runs.
+               A single draw of this task is not reproducible. Report the median
+               and the range; do not publish one draw as the score.
+
+--- bf16 / mbpp_plus ---
+
+  mbpp_plus   [pass_at_1,none]   n=378   draws=3
+      rep1       0.000%   0/378
+      rep2       0.000%   0/378
+      rep3       0.000%   0/378
+      median     0.000%
+      range      0.000% ..   0.000%   (spread 0.000 pp)
+      Wilson 95% on median: [0.00, 1.01]  (sampling error only)
+      VERDICT: DETERMINISTIC -- all 3 draws identical.
+
+--- nvfp4_w4a16 / humaneval_instruct ---
+
+  humaneval_instruct   [pass@1,create_test]   n=164   draws=3
+      rep1      76.220%   125/164
+      rep2      81.098%   133/164
+      rep3      81.098%   133/164
+      median    81.098%
+      range     76.220% ..  81.098%   (spread 4.878 pp)
+      Wilson 95% on median: [74.42, 86.35]  (sampling error only)
+      VERDICT: NONDETERMINISTIC -- identical config, 4.878 pp spread across re-runs.
+               A single draw of this task is not reproducible. Report the median
+               and the range; do not publish one draw as the score.
+
+--- nvfp4_w4a16 / mbpp_plus ---
+
+  mbpp_plus   [pass_at_1,none]   n=378   draws=3
+      rep1       0.000%   0/378
+      rep2       0.000%   0/378
+      rep3       0.000%   0/378
+      median     0.000%
+      range      0.000% ..   0.000%   (spread 0.000 pp)
+      Wilson 95% on median: [0.00, 1.01]  (sampling error only)
+      VERDICT: DETERMINISTIC -- all 3 draws identical.
+
+--- bf16 / mbpp_plus_instruct ---
+
+  mbpp_plus_instruct   [pass_at_1,extract_code]   n=378   draws=3
+      rep1       0.000%   0/378
+      rep2       0.000%   0/378
+      rep3       0.000%   0/378
+      median     0.000%
+      range      0.000% ..   0.000%   (spread 0.000 pp)
+      Wilson 95% on median: [0.00, 1.01]  (sampling error only)
+      VERDICT: DETERMINISTIC -- all 3 draws identical.
+
+--- nvfp4_w4a16 / mbpp_plus_instruct ---
+
+  mbpp_plus_instruct   [pass_at_1,extract_code]   n=378   draws=3
+      rep1       0.000%   0/378
+      rep2       0.000%   0/378
+      rep3       0.000%   0/378
+      median     0.000%
+      range      0.000% ..   0.000%   (spread 0.000 pp)
+      Wilson 95% on median: [0.00, 1.01]  (sampling error only)
+      VERDICT: DETERMINISTIC -- all 3 draws identical.
+
+
+===== MBPP+ RE-SCORED from logged generations (2026-09-09) =====
+lm-eval mbpp_plus + mbpp_plus_instruct both scored 0/378: the extract_code filter
+strips the leading `def`, producing a syntax error. The model DID write correct
+code. Re-scored here with a def-preserving extractor against each sample s target
+asserts (base MBPP tests, not the full EvalPlus+ battery - read as ~MBPP not
+strict MBPP+). Both arms same pipeline, so the BF16-vs-NVFP4 delta is the signal.
+
+  bf16         MBPP+ : median 73.81%  (72.49 / 73.81 / 73.81)   n=378 draws=3
+  nvfp4_w4a16  MBPP+ : median 56.08%  (56.08 / 56.08 / 57.14)   n=378 draws=3
+  -> NVFP4-W4A16 cost on MBPP+ : ~17.7 pp
+
+===== HEADLINE =====
+                     BF16      NVFP4-W4A16   NVFP4 cost
+  HumanEval-inst    85.98%       81.10%       ~4.9 pp
+  MBPP+ (rescored)  73.81%       56.08%      ~17.7 pp
+
+NVFP4-W4A16 on a 2.5B dense model has a large, UNEVEN quality cost - modest on
+HumanEval, severe on MBPP+. Contradicts the "2-4%" NVFP4 marketing (measured on
+much bigger models). For a 2.5B that already fits 16 GB at BF16/FP8, NVFP4 is a
+bad trade: real capability lost for a marginal speed gain. NVFP4 pays off only
+when the model would not otherwise fit.

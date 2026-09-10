@@ -1,0 +1,22 @@
+== mixed-nvfp4-fp8  2026-09-09T06:36:42-05:00 ==
+2.2G	/home/ttimm/models/minicpm5-2b-mixed-nvfp4-fp8/model.safetensors
+--- humaneval_instruct ---
+      rep2      82.927%   136/164
+      rep3      84.146%   138/164
+      median    84.146%
+      range     82.927% ..  85.976%   (spread 3.049 pp)
+      Wilson 95% on median: [77.78, 88.95]  (sampling error only)
+      VERDICT: NONDETERMINISTIC -- identical config, 3.049 pp spread across re-runs.
+               A single draw of this task is not reproducible. Report the median
+               and the range; do not publish one draw as the score.
+
+--- mbpp ---
+      rep2      46.600%   233/500
+      rep3      46.000%   230/500
+      median    46.600%
+      range     46.000% ..  46.800%   (spread 0.800 pp)
+      Wilson 95% on median: [42.27, 50.98]  (sampling error only)
+      VERDICT: NONDETERMINISTIC -- identical config, 0.800 pp spread across re-runs.
+               A single draw of this task is not reproducible. Report the median
+               and the range; do not publish one draw as the score.
+

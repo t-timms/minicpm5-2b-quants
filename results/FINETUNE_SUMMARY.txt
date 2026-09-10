@@ -1,0 +1,60 @@
+===== MiniCPM5-2B coding LoRA - dual eval  2026-09-09T23:40:23-05:00 =====
+base=MiniCPM5-2B  tuned=+coding LoRA (self-oss 12k + ultrachat 3k rehearsal, r32 2ep)
+SHIP GATE: coding (HE/MBPP) up  AND  ifeval not down >2pp
+
+-- reference (earlier runs): base HE 86.59 / MBPP 50.60 --
+--- base / ifeval ---
+"prompt_level_strict_acc,none": 0.40850277264325324
+"prompt_level_strict_acc_stderr,none": 0.021153244098720447
+"inst_level_strict_acc,none": 0.5443645083932853
+
+--- tuned_bf16 / humaneval_instruct ---
+  humaneval_instruct   [pass@1,create_test]   n=164   draws=3
+      rep1      63.415%   104/164
+      rep2      63.415%   104/164
+      rep3      63.415%   104/164
+      median    63.415%
+      range     63.415% ..  63.415%   (spread 0.000 pp)
+      Wilson 95% on median: [55.81, 70.40]  (sampling error only)
+      VERDICT: DETERMINISTIC -- all 3 draws identical.
+
+--- tuned_bf16 / mbpp ---
+      rep2      48.200%   241/500
+      rep3      48.200%   241/500
+      median    48.200%
+      range     47.600% ..  48.200%   (spread 0.600 pp)
+      Wilson 95% on median: [43.85, 52.58]  (sampling error only)
+      VERDICT: NONDETERMINISTIC -- identical config, 0.600 pp spread across re-runs.
+               A single draw of this task is not reproducible. Report the median
+               and the range; do not publish one draw as the score.
+
+--- tuned_bf16 / ifeval ---
+"prompt_level_strict_acc,none": 0.44731977818853974
+"prompt_level_strict_acc_stderr,none": 0.021396815020425928
+"inst_level_strict_acc,none": 0.5683453237410072
+
+--- tuned_fp8 / humaneval_instruct ---
+      rep2      65.854%   108/164
+      rep3      65.854%   108/164
+      median    65.854%
+      range     65.854% ..  66.463%   (spread 0.610 pp)
+      Wilson 95% on median: [58.31, 72.67]  (sampling error only)
+      VERDICT: NONDETERMINISTIC -- identical config, 0.610 pp spread across re-runs.
+               A single draw of this task is not reproducible. Report the median
+               and the range; do not publish one draw as the score.
+
+--- tuned_fp8 / mbpp ---
+      rep2      47.600%   238/500
+      rep3      47.400%   237/500
+      median    47.400%
+      range     47.400% ..  47.600%   (spread 0.200 pp)
+      Wilson 95% on median: [43.06, 51.78]  (sampling error only)
+      VERDICT: NONDETERMINISTIC -- identical config, 0.200 pp spread across re-runs.
+               A single draw of this task is not reproducible. Report the median
+               and the range; do not publish one draw as the score.
+
+--- tuned_fp8 / ifeval ---
+"prompt_level_strict_acc,none": 0.46950092421441775
+"prompt_level_strict_acc_stderr,none": 0.021476507681143016
+"inst_level_strict_acc,none": 0.5887290167865707
+

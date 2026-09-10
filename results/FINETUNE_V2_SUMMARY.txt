@@ -1,0 +1,80 @@
+===== MiniCPM5-2B coding LoRA v2 - dual eval  2026-09-10T02:45:41-05:00 =====
+base=MiniCPM5-2B  tuned=+coding2 LoRA (OpenCodeInstruct test-passing 11k + evol 2k + alpaca 1.5k, LR2e-5 r32/a32 1ep)
+SHIP GATE: coding (HE/MBPP) UP vs base  AND  ifeval not down >2pp
+v1 ref (regressed): tuned HE 63.4 / MBPP 48.2 ; base HE ~86 / MBPP ~50.6
+
+--- base / humaneval_instruct ---
+      rep2      87.805%   144/164
+      rep3      87.805%   144/164
+      median    87.805%
+      range     85.976% ..  87.805%   (spread 1.829 pp)
+      Wilson 95% on median: [81.91, 91.97]  (sampling error only)
+      VERDICT: NONDETERMINISTIC -- identical config, 1.829 pp spread across re-runs.
+               A single draw of this task is not reproducible. Report the median
+               and the range; do not publish one draw as the score.
+
+--- base / mbpp ---
+      rep2      50.600%   253/500
+      rep3      51.000%   255/500
+      median    50.600%
+      range     50.600% ..  51.000%   (spread 0.400 pp)
+      Wilson 95% on median: [46.23, 54.96]  (sampling error only)
+      VERDICT: NONDETERMINISTIC -- identical config, 0.400 pp spread across re-runs.
+               A single draw of this task is not reproducible. Report the median
+               and the range; do not publish one draw as the score.
+
+--- base / ifeval ---
+"prompt_level_strict_acc,none": 0.41404805914972276
+"prompt_level_strict_acc_stderr,none": 0.021196272552471317
+"inst_level_strict_acc,none": 0.5503597122302158
+
+--- tuned_bf16 / humaneval_instruct ---
+      rep2      73.171%   120/164
+      rep3      73.171%   120/164
+      median    73.171%
+      range     71.951% ..  73.171%   (spread 1.220 pp)
+      Wilson 95% on median: [65.92, 79.36]  (sampling error only)
+      VERDICT: NONDETERMINISTIC -- identical config, 1.220 pp spread across re-runs.
+               A single draw of this task is not reproducible. Report the median
+               and the range; do not publish one draw as the score.
+
+--- tuned_bf16 / mbpp ---
+      rep2      48.400%   242/500
+      rep3      48.600%   243/500
+      median    48.600%
+      range     48.400% ..  48.600%   (spread 0.200 pp)
+      Wilson 95% on median: [44.25, 52.97]  (sampling error only)
+      VERDICT: NONDETERMINISTIC -- identical config, 0.200 pp spread across re-runs.
+               A single draw of this task is not reproducible. Report the median
+               and the range; do not publish one draw as the score.
+
+--- tuned_bf16 / ifeval ---
+"prompt_level_strict_acc,none": 0.5027726432532348
+"prompt_level_strict_acc_stderr,none": 0.021516243323548144
+"inst_level_strict_acc,none": 0.6247002398081535
+
+--- tuned_fp8 / humaneval_instruct ---
+  humaneval_instruct   [pass@1,create_test]   n=164   draws=3
+      rep1      69.512%   114/164
+      rep2      69.512%   114/164
+      rep3      69.512%   114/164
+      median    69.512%
+      range     69.512% ..  69.512%   (spread 0.000 pp)
+      Wilson 95% on median: [62.09, 76.04]  (sampling error only)
+      VERDICT: DETERMINISTIC -- all 3 draws identical.
+
+--- tuned_fp8 / mbpp ---
+      rep2      47.000%   235/500
+      rep3      47.800%   239/500
+      median    47.800%
+      range     47.000% ..  47.800%   (spread 0.800 pp)
+      Wilson 95% on median: [43.46, 52.18]  (sampling error only)
+      VERDICT: NONDETERMINISTIC -- identical config, 0.800 pp spread across re-runs.
+               A single draw of this task is not reproducible. Report the median
+               and the range; do not publish one draw as the score.
+
+--- tuned_fp8 / ifeval ---
+"prompt_level_strict_acc,none": 0.4731977818853974
+"prompt_level_strict_acc_stderr,none": 0.021485638661938006
+"inst_level_strict_acc,none": 0.5971223021582733
+

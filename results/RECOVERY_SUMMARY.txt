@@ -1,0 +1,53 @@
+===== MiniCPM5-2B RECOVERY  2026-09-09T05:12:38-05:00 =====
+arms: bf16 nvfp4_rtn nvfp4_gptq fp8  |  task: humaneval_instruct  |  3 draws greedy
+nvfp4_rtn = ModelOpt baseline NVFP4A16 | nvfp4_gptq = llm-compressor GPTQ-NVFP4A16 (512 code calib)
+
+--- bf16 ---
+  humaneval_instruct   [pass@1,create_test]   n=164   draws=3
+      rep1      86.585%   142/164
+      rep2      86.585%   142/164
+      rep3      85.976%   141/164
+      median    86.585%
+      range     85.976% ..  86.585%   (spread 0.610 pp)
+      Wilson 95% on median: [80.52, 90.97]  (sampling error only)
+      VERDICT: NONDETERMINISTIC -- identical config, 0.610 pp spread across re-runs.
+               A single draw of this task is not reproducible. Report the median
+               and the range; do not publish one draw as the score.
+
+--- nvfp4_rtn ---
+  humaneval_instruct   [pass@1,create_test]   n=164   draws=3
+      rep1      79.878%   131/164
+      rep2      79.878%   131/164
+      rep3      77.439%   127/164
+      median    79.878%
+      range     77.439% ..  79.878%   (spread 2.439 pp)
+      Wilson 95% on median: [73.09, 85.30]  (sampling error only)
+      VERDICT: NONDETERMINISTIC -- identical config, 2.439 pp spread across re-runs.
+               A single draw of this task is not reproducible. Report the median
+               and the range; do not publish one draw as the score.
+
+--- nvfp4_gptq ---
+  humaneval_instruct   [pass@1,create_test]   n=164   draws=3
+      rep1      84.146%   138/164
+      rep2      81.707%   134/164
+      rep3      84.146%   138/164
+      median    84.146%
+      range     81.707% ..  84.146%   (spread 2.439 pp)
+      Wilson 95% on median: [77.78, 88.95]  (sampling error only)
+      VERDICT: NONDETERMINISTIC -- identical config, 2.439 pp spread across re-runs.
+               A single draw of this task is not reproducible. Report the median
+               and the range; do not publish one draw as the score.
+
+--- fp8 ---
+  humaneval_instruct   [pass@1,create_test]   n=164   draws=3
+      rep1      85.366%   140/164
+      rep2      84.756%   139/164
+      rep3      84.146%   138/164
+      median    84.756%
+      range     84.146% ..  85.366%   (spread 1.220 pp)
+      Wilson 95% on median: [78.46, 89.46]  (sampling error only)
+      VERDICT: NONDETERMINISTIC -- identical config, 1.220 pp spread across re-runs.
+               A single draw of this task is not reproducible. Report the median
+               and the range; do not publish one draw as the score.
+
+RUN1 reference: bf16 HE 85.98% median / nvfp4_rtn 81.10%

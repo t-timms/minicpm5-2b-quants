@@ -1,0 +1,45 @@
+== MiniCPM5-2B MBPP (base, 3-shot) recovery  2026-09-09T05:47:59-05:00 ==
+--- bf16 ---
+      rep1      50.600%   253/500
+      rep2      51.000%   255/500
+      rep3      50.400%   252/500
+      median    50.600%
+      range     50.400% ..  51.000%   (spread 0.600 pp)
+      Wilson 95% on median: [46.23, 54.96]  (sampling error only)
+      VERDICT: NONDETERMINISTIC -- identical config, 0.600 pp spread across re-runs.
+               A single draw of this task is not reproducible. Report the median
+               and the range; do not publish one draw as the score.
+
+--- nvfp4_rtn ---
+      rep1      41.200%   206/500
+      rep2      41.800%   209/500
+      rep3      41.200%   206/500
+      median    41.200%
+      range     41.200% ..  41.800%   (spread 0.600 pp)
+      Wilson 95% on median: [36.97, 45.57]  (sampling error only)
+      VERDICT: NONDETERMINISTIC -- identical config, 0.600 pp spread across re-runs.
+               A single draw of this task is not reproducible. Report the median
+               and the range; do not publish one draw as the score.
+
+--- nvfp4_gptq ---
+      rep1      45.600%   228/500
+      rep2      45.800%   229/500
+      rep3      46.400%   232/500
+      median    45.800%
+      range     45.600% ..  46.400%   (spread 0.800 pp)
+      Wilson 95% on median: [41.48, 50.18]  (sampling error only)
+      VERDICT: NONDETERMINISTIC -- identical config, 0.800 pp spread across re-runs.
+               A single draw of this task is not reproducible. Report the median
+               and the range; do not publish one draw as the score.
+
+--- fp8 ---
+      rep1      49.000%   245/500
+      rep2      48.800%   244/500
+      rep3      48.800%   244/500
+      median    48.800%
+      range     48.800% ..  49.000%   (spread 0.200 pp)
+      Wilson 95% on median: [44.44, 53.17]  (sampling error only)
+      VERDICT: NONDETERMINISTIC -- identical config, 0.200 pp spread across re-runs.
+               A single draw of this task is not reproducible. Report the median
+               and the range; do not publish one draw as the score.
+
