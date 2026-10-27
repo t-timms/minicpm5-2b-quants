@@ -29,3 +29,4 @@ peek_v2.py
 /rerun_mbpp.sh
 /eval_mixed.sh
 /*.txt
+spark_eval/
